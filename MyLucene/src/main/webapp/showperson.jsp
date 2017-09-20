@@ -19,6 +19,9 @@
     		}
     		document.getElementById("updatetd"+id).style.visibility="visible";
     	}
+    	function _delete(id){
+    		window.location.href="http://localhost:8080/MyLucene/personController/delete?id="+encodeURIComponent(id);
+    	}
   </script>
 <body>
 	<input id="search" name="name" />
@@ -33,6 +36,7 @@
 				<td>${person.name }</td>
 				<td>${person.age }</td>
 				<td><button onclick="javascript:update(${person.id})">修改</button></td>
+				<td><button onclick="javascript:_delete(${person.id})">删除</button></td>
 				<td style="visibility:hidden;" id="updatetd${person.id}" class="hide" >
 					<form action="/MyLucene/personController/update" method="POST" >
 						<input type="hidden" id="id" name="id" value=${person.id} />姓名:<input id="name" name="name"  value=${person.name} />年龄:<input id="age" name="age" value=${person.age} /> 

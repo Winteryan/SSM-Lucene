@@ -17,4 +17,9 @@
 	<update id="update" parameterType="com.huawei.model.Person">
 		update person set name = #{name},age= #{age} WHERE id = ${id}
 	</update>
+	
+	<delete id="delete" parameterType="String" >
+		delete from person where id=${id}
+	</delete>
+	
 </mapper>

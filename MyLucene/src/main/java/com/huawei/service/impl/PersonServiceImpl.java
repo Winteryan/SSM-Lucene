@@ -33,5 +33,9 @@ public class PersonServiceImpl implements IPersonService {
 		// TODO Auto-generated method stub
 		personMapper.update(person);
 	}
+	public void delete(String id) {
+		// TODO Auto-generated method stub
+		personMapper.delete(id);
+	}
     
 }

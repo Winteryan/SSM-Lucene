@@ -71,7 +71,7 @@ public class PersonController {
 		luceneIndex.addIndex(person);
 		List<Person> persons = personService.loadPersons();
 		model.addAttribute("persons", persons);
-		model.addAttribute("updateflag", "1");
+		//model.addAttribute("updateflag", "1");
 		return "showperson";
 	}
 	
@@ -83,11 +83,20 @@ public class PersonController {
 		Person person = new Person();
 		person.setId(id);
 		person.setName(name);
-		person.setAge(age);
-		System.out.println("shide" + name + age);
 		personService.update(person);
 		LuceneIndex luceneIndex = new LuceneIndex();
 		luceneIndex.updateIndex(person);
+		List<Person> persons = personService.loadPersons();
+		model.addAttribute("persons", persons);
+		return "showperson";
+	}
+	
+	@RequestMapping("/delete")
+	public String delete(@RequestParam(value = "id", required = false, defaultValue = "") String id, Model model)
+			throws Exception {
+		LuceneIndex luceneIndex = new LuceneIndex();
+		personService.delete(id);
+		luceneIndex.deleteIndex(id);
 		List<Person> persons = personService.loadPersons();
 		model.addAttribute("persons", persons);
 		return "showperson";

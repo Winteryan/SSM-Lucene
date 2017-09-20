@@ -22,4 +22,6 @@ public interface PersonMapper {
 	int save(Person person);
 
 	void update(Person person);
+
+	void delete(@Param("id") String id);
 }

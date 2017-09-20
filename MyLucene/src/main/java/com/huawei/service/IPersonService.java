@@ -15,4 +15,6 @@ public interface IPersonService {
 	int  save(Person person);
 
 	void update(Person person);
+
+	void delete(String id);
 }
