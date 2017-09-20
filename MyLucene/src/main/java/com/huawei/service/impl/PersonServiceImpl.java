@@ -25,5 +25,9 @@ public class PersonServiceImpl implements IPersonService {
     public List<Person> loadPersons() {
         return personMapper.queryAll();
     }
+	public int save(Person person) {
+		// TODO Auto-generated method stub
+		return personMapper.save(person);
+	}
     
 }

@@ -7,7 +7,16 @@
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
         <title>person list</title>
     </head>
+    <script type="text/javascript"  language="javascript">
+    	function doSearch(){
+    		var search=document.getElementById("search").value;
+    		console.log(search);
+    		window.location.href="http://localhost:8080/MyLucene/personController/searchPersonq?q="+encodeURIComponent(search);
+    	}
+  </script>
     <body>
+    	<input  id="search" name="name"/>
+    	<button  onclick="javascript:doSearch()">搜索</button>
         <table>
             <tr>
                 <th>姓名</th>
@@ -20,5 +29,10 @@
                 </tr>
             </c:forEach>
         </table>
+        <form action="/MyLucene/personController/save" method="POST">
+        <input  id="name" name="name"/>
+        <input  id="age" name="age"/>
+        <input type="submit" value="提交" />
+        </form>
     </body>
 </html>

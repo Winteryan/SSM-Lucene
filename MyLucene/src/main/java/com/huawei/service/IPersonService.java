@@ -11,4 +11,6 @@ public interface IPersonService {
      * @return
      */
     List<Person> loadPersons();
+
+	int  save(Person person);
 }

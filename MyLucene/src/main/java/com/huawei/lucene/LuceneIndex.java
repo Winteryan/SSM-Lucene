@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.apache.lucene.analysis.TokenStream;
 import org.apache.lucene.analysis.cn.smart.SmartChineseAnalyzer;
+import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.apache.lucene.document.Document;
 import org.apache.lucene.document.Field;
 import org.apache.lucene.document.StringField;
@@ -29,6 +30,7 @@ import org.apache.lucene.search.highlight.SimpleHTMLFormatter;
 import org.apache.lucene.search.highlight.SimpleSpanFragmenter;
 import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.FSDirectory;
+
 import com.alibaba.druid.util.StringUtils;
 import com.huawei.model.Person;
 
@@ -41,7 +43,8 @@ public class LuceneIndex {
 	  */
 	 private IndexWriter getWriter()throws Exception {
 		 dir = FSDirectory.open(Paths.get("C://lucene"));
-		 SmartChineseAnalyzer analyzer = new SmartChineseAnalyzer();
+		 //SmartChineseAnalyzer analyzer = new SmartChineseAnalyzer();
+		 StandardAnalyzer analyzer = new StandardAnalyzer();
 		 IndexWriterConfig iwc = new IndexWriterConfig(analyzer);
 		 IndexWriter writer = new IndexWriter(dir, iwc );
 		 return writer;
@@ -98,7 +101,8 @@ public class LuceneIndex {
 		IndexReader reader = DirectoryReader.open(dir);
 		IndexSearcher is = new IndexSearcher(reader);
 		BooleanQuery.Builder booleanQuery = new BooleanQuery.Builder();
-		SmartChineseAnalyzer analyzer = new SmartChineseAnalyzer();
+		//SmartChineseAnalyzer analyzer = new SmartChineseAnalyzer();
+		StandardAnalyzer analyzer = new StandardAnalyzer();
 		QueryParser parser = new QueryParser("name", analyzer);
 		Query query = parser.parse(q);
 		QueryParser parser2 = new QueryParser("age", analyzer);
@@ -119,6 +123,8 @@ public class LuceneIndex {
 			person.setAge(doc.get("age"));
 			String name = doc.get("name");
 			String age = doc.get("age");
+			System.out.println("__________________________________");
+			System.out.println(person.getId()+name+age);
 			if(name !=null){
 				TokenStream tokenStream = analyzer.tokenStream("name", new StringReader(name));
 				String hname = highlighter.getBestFragment(tokenStream, name);
@@ -139,7 +145,7 @@ public class LuceneIndex {
 					}
 					
 				}else {
-					person.setName(hage);
+					person.setAge(hage);
 				}
 			}
 			personList.add(person);

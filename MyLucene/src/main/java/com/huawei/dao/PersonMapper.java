@@ -2,6 +2,8 @@ package com.huawei.dao;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.huawei.model.Person;
 
 public interface PersonMapper {
@@ -16,4 +18,6 @@ public interface PersonMapper {
      * @return
      */
     List<Person> queryAll();
+
+	int save(Person person);
 }
