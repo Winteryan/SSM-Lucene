@@ -29,5 +29,9 @@ public class PersonServiceImpl implements IPersonService {
 		// TODO Auto-generated method stub
 		return personMapper.save(person);
 	}
+	public void update(Person person) {
+		// TODO Auto-generated method stub
+		personMapper.update(person);
+	}
     
 }

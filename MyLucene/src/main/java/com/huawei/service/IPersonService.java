@@ -13,4 +13,6 @@ public interface IPersonService {
     List<Person> loadPersons();
 
 	int  save(Person person);
+
+	void update(Person person);
 }

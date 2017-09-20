@@ -20,4 +20,6 @@ public interface PersonMapper {
     List<Person> queryAll();
 
 	int save(Person person);
+
+	void update(Person person);
 }

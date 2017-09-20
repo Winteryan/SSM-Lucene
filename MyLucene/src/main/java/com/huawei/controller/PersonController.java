@@ -64,11 +64,30 @@ public class PersonController {
 		Person person = new Person();
 		person.setName(name);
 		person.setAge(age);
-		System.out.println("shide"+name+age);
-		int x =personService.save(person);
+		System.out.println("shide" + name + age);
+		int x = personService.save(person);
 		System.out.println(x);
 		LuceneIndex luceneIndex = new LuceneIndex();
-	    luceneIndex.addIndex(person);
+		luceneIndex.addIndex(person);
+		List<Person> persons = personService.loadPersons();
+		model.addAttribute("persons", persons);
+		model.addAttribute("updateflag", "1");
+		return "showperson";
+	}
+	
+	@RequestMapping(value = "/update", method = RequestMethod.POST)
+	public String update(Model model, HttpServletRequest request, HttpServletResponse response) throws Exception {
+		String name = request.getParameter("name");
+		String age = request.getParameter("age");
+		int id = Integer.parseInt(request.getParameter("id"));
+		Person person = new Person();
+		person.setId(id);
+		person.setName(name);
+		person.setAge(age);
+		System.out.println("shide" + name + age);
+		personService.update(person);
+		LuceneIndex luceneIndex = new LuceneIndex();
+		luceneIndex.updateIndex(person);
 		List<Person> persons = personService.loadPersons();
 		model.addAttribute("persons", persons);
 		return "showperson";

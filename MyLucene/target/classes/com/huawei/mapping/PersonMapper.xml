@@ -13,4 +13,8 @@
 		</selectKey>
 		insert into person (name,age) values (#{name},#{age})
 	</insert>
+	
+	<update id="update" parameterType="com.huawei.model.Person">
+		update person set name = #{name},age= #{age} WHERE id = ${id}
+	</update>
 </mapper>
