@@ -83,6 +83,7 @@ public class PersonController {
 		Person person = new Person();
 		person.setId(id);
 		person.setName(name);
+		person.setAge(age);
 		personService.update(person);
 		LuceneIndex luceneIndex = new LuceneIndex();
 		luceneIndex.updateIndex(person);

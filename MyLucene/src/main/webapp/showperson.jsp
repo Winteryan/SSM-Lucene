@@ -9,6 +9,10 @@
 </head>
 <script type="text/javascript" language="javascript">
     	function doSearch(){
+    		var x = document.getElementsByClassName("hide");
+    		for(var i=0;i<x.length;i++){
+    			x[i].style.visibility="hidden";
+    		}
     		var search=document.getElementById("search").value;
     		window.location.href="http://localhost:8080/MyLucene/personController/searchPersonq?q="+encodeURIComponent(search);
     	}
@@ -29,17 +33,17 @@
 	<table>
 		<tr>
 			<th>姓名</th>
-			<th>年龄</th>
+			<th>描述</th>
 		</tr>
 		<c:forEach items="${persons}" var="person">
 			<tr>
 				<td>${person.name }</td>
 				<td>${person.age }</td>
-				<td><button onclick="javascript:update(${person.id})">修改</button></td>
-				<td><button onclick="javascript:_delete(${person.id})">删除</button></td>
+				<td><button onclick="javascript:update(${person.id})"  id="_update">修改</button></td>
+				<td><button onclick="javascript:_delete(${person.id})" id="_delete">删除</button></td>
 				<td style="visibility:hidden;" id="updatetd${person.id}" class="hide" >
 					<form action="/MyLucene/personController/update" method="POST" >
-						<input type="hidden" id="id" name="id" value=${person.id} />姓名:<input id="name" name="name"  value=${person.name} />年龄:<input id="age" name="age" value=${person.age} /> 
+						<input type="hidden" id="id" name="id" value=${person.id} /> 姓名:<input id="name" name="name"  value=${person.name} /> 描述:<input id="age" name="age" value=${person.age} /> 
 						<input type="submit" value="提交" />
 					</form>
 				</td>
@@ -47,7 +51,7 @@
 		</c:forEach>
 	</table>
 	<form action="/MyLucene/personController/save" method="POST">
-		姓名:<input id="name" name="name" /> 年龄:<input id="age" name="age" /> <input type="submit" value="提交" />
+		姓名:<input id="name" name="name" /> 描述:<input id="age" name="age" /> <input type="submit" value="提交" />
 	</form>
 </body>
 </html>
